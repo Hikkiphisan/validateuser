@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${user}" th:action="@{/validateUser}" method="post" >
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input th:field="*{name}"></td>
+            <!-- ràng buộc trường nhập liệu (input field) với thuộc tính name của đối tượng model trong Spring MVC (hoặc bất kỳ framework sử dụng Thymeleaf). Khi người dùng nhập giá trị vào trường này và gửi form, giá trị nhập vào sẽ được gửi về controller để xử lý.-->
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>   <!--name trong hasErrors('name') là name được lấy từ model, là tên của trường dữ liệu-->
+                 <!-- chỉ khi xảy ra lỗi thì thẻ td mới hiện-->
+<!--            name trong th:errors là dữ liệu lấy từ thẻ nhập liệu bên trên-->
+
+        </tr>
+        <tr>
+            <td>Age:</td>
+            <td><input th:field="*{age}"></td>
+            <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Name Error</td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
